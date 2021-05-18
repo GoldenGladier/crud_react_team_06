@@ -5,23 +5,6 @@ import axios from "axios";
 
 const Pregunta = ({ id, pregunta }) => {
 
-    const handleClickEliminar = (event) => {
-        //Eliminar
-        axios.post(`/Crud_React/Eliminar?id=${id}`).then(response => {
-            console.info(response.data);
-            if (response.data.message) {
-                alert(response.data.message);
-            } else {
-                alert(response.data.error);
-            }
-        }).catch(error => {
-            console.info(error);
-            alert(response.data.message);
-        }).finally(() => {
-            window.location.href = "/Crud_React/";
-        });
-    }
-
     return (
         <tr>
             <td>{pregunta}</td>
@@ -34,14 +17,11 @@ const Pregunta = ({ id, pregunta }) => {
                     Editar pregunta
                 </Link>
                 
-                <Button
-                    variant="danger"
-                    className="M-6"
-                    onClick={handleClickEliminar}>
+                <Link to={`/Crud_React/delete?id=${id}`} className="btn btn-danger M-6 CustomLink" >
                     Eliminar pregunta
-                </Button>
+                </Link>
             </td>
         </tr>
-    )
+    );
 }
 export default Pregunta;
